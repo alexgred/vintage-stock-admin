@@ -1,9 +1,13 @@
 import { theme, type ThemeConfig } from "antd";
 
 export const colorBgBase = '#17191d';
+export const colorBgBody = 'color-mix(in srgb, #17191d, grey 3%)';
+export const itemActiveBg = 'var(--ant-color-primary)';
+export const itemSelectedBg = 'var(--ant-color-primary)';
+export const itemSelectedColor = 'var(--ant-color-text-base)';
 
 export const config: ThemeConfig = {
-  cssVar: false,
+  cssVar: true,
   algorithm: theme.darkAlgorithm,
   token: {
     colorBgBase: colorBgBase,
@@ -13,8 +17,13 @@ export const config: ThemeConfig = {
     Layout: {
       headerBg: colorBgBase,
       siderBg: colorBgBase,
-      bodyBg: colorBgBase,
+      bodyBg: colorBgBody,
       algorithm: true,
+    },
+    Menu: {
+      itemBg: colorBgBase,
+      itemSelectedBg: itemSelectedBg,
+      itemSelectedColor: itemSelectedColor,
     },
   },
 };
