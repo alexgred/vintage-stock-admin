@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 import { Button, ConfigProvider, Layout as Wrapper } from 'antd';
-import Sider from 'antd/es/layout/Sider';
 import { Content, Header } from 'antd/es/layout/layout';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { config } from '@/config';
 
 import styles from './Layout.module.css';
+import { Sidebar } from '../Sidebar';
 
 
 export default function Layout({
@@ -20,11 +20,9 @@ export default function Layout({
   return (
     <ConfigProvider theme={config}>
       <Wrapper style={{ minHeight: '100vh' }} hasSider>
-        <Sider trigger={null} collapsible collapsed={collapsed} width="20%">
-          Sider
-        </Sider>
+        <Sidebar collapsed={collapsed} />
         <Wrapper>
-          <Header>
+          <Header className={styles.header}>
             <Button
               type="text"
               icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}

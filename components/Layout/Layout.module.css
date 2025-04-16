@@ -2,6 +2,6 @@
   padding: 24px;
 }
 
-.menu {
-  height: 100%;
+.header {
+  border-bottom: 1px solid var(--ant-color-split);
 }

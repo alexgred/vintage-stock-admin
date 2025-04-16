@@ -1,0 +1,9 @@
+.logo {
+  height: var(--ant-layout-header-height);
+  width: 100%;
+  border-bottom: 1px solid var(--ant-color-split);
+}
+
+.menu {
+  height: 100%;
+}
