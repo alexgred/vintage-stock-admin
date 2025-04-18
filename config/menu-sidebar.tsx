@@ -31,7 +31,7 @@ export const itemsSidebar: MenuProps['items'] = [
       },
       {
         key: 'productAdd',
-        label: <Link href="/products/create" title={labels.productAdd}>{labels.productAdd}</Link>,
+        label: <Link href="/products/add" title={labels.productAdd}>{labels.productAdd}</Link>,
       },
     ],
   },

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, ConfigProvider, Layout as Wrapper } from 'antd';
+import { Button, ConfigProvider, Layout as LayoutAntD } from 'antd';
 import { Content, Header } from 'antd/es/layout/layout';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { config } from '@/config';
@@ -19,9 +19,9 @@ export default function Layout({
 
   return (
     <ConfigProvider theme={config}>
-      <Wrapper style={{ minHeight: '100vh' }} hasSider>
+      <LayoutAntD style={{ minHeight: '100vh' }} hasSider>
         <Sidebar collapsed={collapsed} />
-        <Wrapper>
+        <LayoutAntD>
           <Header className={styles.header}>
             <Button
               type="text"
@@ -35,8 +35,8 @@ export default function Layout({
             />
           </Header>
           <Content className={styles.content}>{children}</Content>
-        </Wrapper>
-      </Wrapper>
+        </LayoutAntD>
+      </LayoutAntD>
     </ConfigProvider>
   );
 }
