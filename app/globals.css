@@ -1,3 +1,7 @@
+:root {
+  --base-margin-bottom: 2rem;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
