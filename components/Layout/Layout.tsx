@@ -8,6 +8,7 @@ import { config } from '@/config';
 
 import styles from './Layout.module.css';
 import { Sidebar } from '../Sidebar';
+import { Breadcrumbs } from '../Breadcrumbs';
 
 
 export default function Layout({
@@ -34,7 +35,10 @@ export default function Layout({
               }}
             />
           </Header>
-          <Content className={styles.content}>{children}</Content>
+          <Content className={styles.content}>
+            <Breadcrumbs />
+            {children}
+          </Content>
         </LayoutAntD>
       </LayoutAntD>
     </ConfigProvider>
