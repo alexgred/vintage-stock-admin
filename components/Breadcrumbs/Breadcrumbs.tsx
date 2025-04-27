@@ -28,8 +28,6 @@ export default function Breadcrumbs(): React.ReactNode {
     title: <Link href='/'>Главная</Link>,
   });
 
-  console.log(segments);
-
   return (
     segments.length > 0 && <Breadcrumb items={items} />
   );

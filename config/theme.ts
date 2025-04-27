@@ -5,6 +5,7 @@ export const colorBgBody = 'color-mix(in srgb, #17191d, grey 3%)';
 export const itemActiveBg = 'var(--ant-color-primary)';
 export const itemSelectedBg = 'var(--ant-color-primary)';
 export const itemSelectedColor = 'var(--ant-color-text-base)';
+export const titleMarginBottom = '0.2em';
 
 export const config: ThemeConfig = {
   cssVar: true,
@@ -24,6 +25,9 @@ export const config: ThemeConfig = {
       itemBg: colorBgBase,
       itemSelectedBg: itemSelectedBg,
       itemSelectedColor: itemSelectedColor,
+    },
+    Typography: {
+      titleMarginBottom: titleMarginBottom,
     },
   },
 };

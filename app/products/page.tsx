@@ -1,19 +1,19 @@
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { ProductsFilters, Table } from '@/components';
-import { Button, Card, Flex } from 'antd';
-import styles from './products.module.css';
+import { ProductsFilters, Table, Button } from '@/components';
+import { Card, Flex } from 'antd';
+import Title from 'antd/es/typography/Title';
 
 export default function Products(): React.ReactNode {
   return (
-    <Flex vertical={true} gap="large">
-      <h1 className={styles.title}>Products</h1>
+    <>
+      <Title>Products</Title>
       <Card>
         <Flex justify="space-between" align="flex-start">
           <ProductsFilters />
           <Button
             type="primary"
-            href="/products/add"
-            icon={<PlusCircleOutlined />}>
+            icon={<PlusCircleOutlined />}
+            href="/products/add">
             Add product
           </Button>
         </Flex>
@@ -21,6 +21,6 @@ export default function Products(): React.ReactNode {
       <Card>
         <Table />
       </Card>
-    </Flex>
+    </>
   );
 }
