@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { Layout } from '@/components';
+import '@ant-design/v5-patch-for-react-19';
 
 import './globals.css';
 
