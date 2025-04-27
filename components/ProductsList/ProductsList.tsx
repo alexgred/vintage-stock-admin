@@ -4,19 +4,20 @@ import { List } from 'antd';
 import { SkinOutlined, CoffeeOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 import { Button } from '../Button';
+import { routes } from '@/config';
 
 const data = [
   {
     title: 'Одежда',
     description: 'Винтажная одежда, бриллиантики',
     icon: <SkinOutlined style={{ fontSize: '24px', marginTop: '8px' }} />,
-    link: '/products/add/clothes',
+    link: routes.PRODUCTS_CLOTHES
   },
   {
     title: 'Напитки',
     description: 'Черный кофе, классика, чай',
     icon: <CoffeeOutlined style={{ fontSize: '24px', marginTop: '8px' }} />,
-    link: '/products/add/drinks',
+    link: routes.PRODUCTS_DRINKS,
   },
 ];
 

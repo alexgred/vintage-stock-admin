@@ -5,33 +5,38 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import Link from 'next/link';
-
-const labels: Record<string, string> = {
-  home: 'Главная',
-  products: 'Список товаров',
-  productsGroup: 'Товары',
-  productAdd: 'Добавить товар',
-  profile: 'Профиль',
-};
+import { routes, labels } from './constants';
 
 export const itemsSidebar: MenuProps['items'] = [
   {
     key: 'home',
     icon: <HomeOutlined />,
-    label: <Link href="/" title={labels.home}>{labels.home}</Link>,
+    label: (
+      <Link href={routes.HOME} title={labels.HOME}>
+        {labels.HOME}
+      </Link>
+    ),
   },
   {
     key: 'productsGroup',
     icon: <ShoppingOutlined />,
-    label: labels.productsGroup,
+    label: labels.PRODUCTS_GROUP,
     children: [
       {
         key: 'products',
-        label: <Link href="/products" title={labels.products}>{labels.products}</Link>,
+        label: (
+          <Link href={routes.PRODUCTS} title={labels.PRODUCTS}>
+            {labels.PRODUCTS}
+          </Link>
+        ),
       },
       {
-        key: 'productAdd',
-        label: <Link href="/products/add" title={labels.productAdd}>{labels.productAdd}</Link>,
+        key: 'productsAdd',
+        label: (
+          <Link href={routes.PRODUCTS_ADD} title={labels.PRODUCTS_ADD}>
+            {labels.PRODUCTS_ADD}
+          </Link>
+        ),
       },
     ],
   },
@@ -41,6 +46,10 @@ export const itemsSidebar: MenuProps['items'] = [
   {
     key: 'profile',
     icon: <UserOutlined />,
-    label: <Link href="/profile" title={labels.profile}>{labels.profile}</Link>,
+    label: (
+      <Link href={routes.PROFILE} title={labels.PROFILE}>
+        {labels.PROFILE}
+      </Link>
+    ),
   },
 ];
