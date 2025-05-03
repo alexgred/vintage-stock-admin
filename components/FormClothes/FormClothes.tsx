@@ -5,6 +5,9 @@ import TextArea from 'antd/es/input/TextArea';
 import { Button } from '../Button';
 import { routes } from '@/config';
 
+interface Size { label: string; value: string };
+type Sizes = Size[];
+
 const labels = {
   name: 'Название',
   description: 'Описание',
@@ -16,7 +19,7 @@ const labels = {
   price: 'Цена',
 };
 
-const options = [
+const options: Sizes = [
   { label: 'xs', value: 'xs' },
   { label: 's', value: 's' },
   { label: 'm', value: 'm' },
