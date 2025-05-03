@@ -1,11 +1,16 @@
-import { Card, Form, Input, Select, Switch } from 'antd';
+'use client';
+
+import { Card, Form, Input, InputNumber, Select, Switch } from 'antd';
 import { default as Checkbox } from 'antd/es/checkbox/Group';
 import FormItem from 'antd/es/form/FormItem';
 import TextArea from 'antd/es/input/TextArea';
 import { Button } from '../Button';
 import { routes } from '@/config';
 
-interface Size { label: string; value: string };
+interface Size {
+  label: string;
+  value: string;
+}
 type Sizes = Size[];
 
 const labels = {
@@ -27,7 +32,11 @@ const options: Sizes = [
   { label: 'xl', value: 'xl' },
 ];
 
-export default function FormClothes(): React.ReactNode {
+export default function FormClothes({
+  edit,
+}: {
+  edit?: boolean;
+}): React.ReactNode {
   return (
     <Card style={{ maxWidth: 800, margin: 'auto' }}>
       <Form name="add-clothes" layout="vertical">
@@ -84,8 +93,18 @@ export default function FormClothes(): React.ReactNode {
           <Checkbox options={options} />
         </FormItem>
 
-        <FormItem name="price" rules={[{ required: true }]}>
-          <Input allowClear />
+        <FormItem
+          name="price"
+          label={labels.price}
+          rules={[{ required: true }]}>
+          <InputNumber
+            defaultValue={0}
+            min={0}
+            controls={false}
+            style={{ width: '100%' }}
+            addonBefore="₽"
+            formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
+          />
         </FormItem>
 
         <FormItem>
@@ -93,7 +112,7 @@ export default function FormClothes(): React.ReactNode {
             name="sold"
             style={{
               display: 'inline-block',
-              marginRight: '20px',
+              marginRight: '12px',
             }}>
             <Switch
               checkedChildren={labels.sold}
@@ -116,12 +135,23 @@ export default function FormClothes(): React.ReactNode {
           <FormItem
             style={{
               display: 'inline-block',
-              marginRight: '20px',
+              marginRight: '12px',
             }}>
             <Button type="primary" htmlType="submit">
               Сохранить
             </Button>
           </FormItem>
+          {edit && (
+            <FormItem
+              style={{
+                display: 'inline-block',
+                marginRight: '12px',
+              }}>
+              <Button variant="solid" htmlType="button" color="danger">
+                Удалить
+              </Button>
+            </FormItem>
+          )}
           <FormItem
             style={{
               display: 'inline-block',

@@ -1,3 +1,7 @@
+import { FormClothes } from '@/components';
+import { Card } from 'antd';
+import Title from 'antd/es/typography/Title';
+
 export default async function ProductEdit({
   params,
 }: {
@@ -5,5 +9,12 @@ export default async function ProductEdit({
 }): Promise<React.ReactNode> {
   const { id } = await params;
 
-  return <div>Product edit: {id}</div>;
+  return (
+    <>
+      <Title>Изменить {id}</Title>
+      <Card>
+        <FormClothes edit />
+      </Card>
+    </>
+  );
 }
