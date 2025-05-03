@@ -34,12 +34,19 @@ const options: Sizes = [
 
 export default function FormClothes({
   edit,
+  productId,
 }: {
   edit?: boolean;
+  productId?: number;
 }): React.ReactNode {
   return (
     <Card style={{ maxWidth: 800, margin: 'auto' }}>
-      <Form name="add-clothes" layout="vertical">
+      <Form
+        name="add-clothes"
+        layout="vertical"
+        initialValues={{
+          ['price']: 0,
+        }}>
         <FormItem label={labels.name} name="name" rules={[{ required: true }]}>
           <Input allowClear />
         </FormItem>
@@ -98,12 +105,13 @@ export default function FormClothes({
           label={labels.price}
           rules={[{ required: true }]}>
           <InputNumber
-            defaultValue={0}
             min={0}
             controls={false}
             style={{ width: '100%' }}
             addonBefore="₽"
-            formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')}
+            formatter={(value) =>
+              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+            }
           />
         </FormItem>
 
@@ -156,7 +164,13 @@ export default function FormClothes({
             style={{
               display: 'inline-block',
             }}>
-            <Button htmlType="button" href={routes.PRODUCTS_ADD}>
+            <Button
+              htmlType="button"
+              href={
+                edit && productId
+                  ? `${routes.PRODUCTS}/${productId}`
+                  : routes.PRODUCTS_ADD
+              }>
               Отмена
             </Button>
           </FormItem>

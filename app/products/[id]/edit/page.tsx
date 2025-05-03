@@ -13,7 +13,7 @@ export default async function ProductEdit({
     <>
       <Title>Изменить {id}</Title>
       <Card>
-        <FormClothes edit />
+        <FormClothes edit productId={id} />
       </Card>
     </>
   );
