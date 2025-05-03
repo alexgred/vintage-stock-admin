@@ -4,3 +4,4 @@ export { Table } from './Table';
 export { ProductsFilters } from './ProductsFilters';
 export { ProductsList } from './ProductsList';
 export { Button } from './Button';
+export { FormClothes } from './FormClothes';
