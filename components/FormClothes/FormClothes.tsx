@@ -26,11 +26,11 @@ const labels = {
 };
 
 const options: Sizes = [
-  { label: 'xs', value: 'xs' },
-  { label: 's', value: 's' },
-  { label: 'm', value: 'm' },
-  { label: 'l', value: 'l' },
-  { label: 'xl', value: 'xl' },
+  { label: 'XS', value: 'xs' },
+  { label: 'S', value: 's' },
+  { label: 'M', value: 'm' },
+  { label: 'L', value: 'l' },
+  { label: 'XL', value: 'xl' },
 ];
 
 export default function FormClothes({

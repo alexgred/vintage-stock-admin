@@ -6,7 +6,7 @@ export const routes = {
   PRODUCTS_DRINKS: '/products/add/drinks',
   PRODUCTS_EDIT: '/products/edit/:id',
   PROFILE: '/profile',
-};
+} as const;
 
 export const labels = {
   HOME: 'Главная',
@@ -14,4 +14,4 @@ export const labels = {
   PRODUCTS_GROUP: 'Товары',
   PRODUCTS_ADD: 'Добавить товар',
   PROFILE: 'Профиль',
-};
+} as const;
