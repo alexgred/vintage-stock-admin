@@ -21,6 +21,7 @@ const labels = {
   size: 'Размер',
   sold: 'Продано',
   reserved: 'Забронировано',
+  cost: 'Себестоимость',
   price: 'Цена',
 };
 
@@ -100,19 +101,44 @@ export default function FormClothes({
           <Checkbox options={options} />
         </FormItem>
 
-        <FormItem
-          name="price"
-          label={labels.price}
-          rules={[{ required: true }]}>
-          <InputNumber
-            min={0}
-            controls={false}
-            style={{ width: '100%' }}
-            addonBefore="₽"
-            formatter={(value) =>
-              `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-            }
-          />
+        <FormItem>
+          <FormItem
+            name="cost"
+            label={labels.cost}
+            rules={[{ required: true }]}
+            style={{
+              display: 'inline-block',
+              width: 'calc(50% - 8px)',
+              margin: '0 8px',
+            }}>
+            <InputNumber
+              min={0}
+              controls={false}
+              style={{ width: '100%' }}
+              addonBefore="₽"
+              formatter={(value) =>
+                `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+              }
+            />
+          </FormItem>
+          <FormItem
+            name="price"
+            label={labels.price}
+            rules={[{ required: true }]}
+            style={{
+              display: 'inline-block',
+              width: 'calc(50% - 8px)',
+            }}>
+            <InputNumber
+              min={0}
+              controls={false}
+              style={{ width: '100%' }}
+              addonBefore="₽"
+              formatter={(value) =>
+                `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+              }
+            />
+          </FormItem>
         </FormItem>
 
         <FormItem>
