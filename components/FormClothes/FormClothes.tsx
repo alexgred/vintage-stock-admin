@@ -31,6 +31,7 @@ const options: Sizes = [
   { label: 'M', value: 'm' },
   { label: 'L', value: 'l' },
   { label: 'XL', value: 'xl' },
+  { label: 'XXL', value: 'xxl' },
 ];
 
 export default function FormClothes({
