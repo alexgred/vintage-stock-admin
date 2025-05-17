@@ -1,0 +1,50 @@
+import { prisma } from '@/lib/prisma';
+import { type NextRequest, NextResponse } from 'next/server';
+
+export async function GET() {
+  try {
+    const products = await prisma.clothes.findMany({
+      include: {
+        conditions: true,
+        sizes: true,
+      },
+    });
+    return NextResponse.json(products);
+  } catch (error) {
+    console.error('Error fetching products:', error);
+
+    return NextResponse.json(
+      { error: 'Failed to fetch products' },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const body = await request.json();
+
+    const product = await prisma.clothes.create({
+      data: {
+        name: body.name,
+        brand: body.brand,
+        description: body.description || '',
+        condition_id: Number(body.conditionId),
+        size_id: Number(body.sizeId),
+        cost: Number(body.cost) || 0,
+        price: Number(body.price) || 0,
+        sold: body.sold || false,
+        reserved: body.reserved || false,
+      },
+    });
+
+    return NextResponse.json(product, { status: 201 });
+  } catch (error) {
+    console.error('Error creating product:', error);
+
+    return NextResponse.json(
+      { error: 'Failed to create product' },
+      { status: 500 }
+    );
+  }
+}
