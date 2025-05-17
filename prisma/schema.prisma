@@ -1,0 +1,37 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model clothes {
+  id           Int        @id @default(autoincrement())
+  name         String     @db.VarChar(255)
+  description  String?
+  brand        String?    @db.VarChar(100)
+  condition_id Int
+  size_id      Int
+  sold         Boolean    @default(false)
+  reserved     Boolean    @default(false)
+  cost         Decimal    @default(0) @db.Decimal(10, 2)
+  price        Decimal    @default(0) @db.Decimal(10, 2)
+  created      DateTime   @default(now()) @db.Timestamp(6)
+  conditions   conditions @relation(fields: [condition_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  sizes        sizes      @relation(fields: [size_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model conditions {
+  id      Int       @id @default(autoincrement())
+  name    String    @unique @db.VarChar(100)
+  clothes clothes[]
+}
+
+model sizes {
+  id      Int       @id @default(autoincrement())
+  name    String    @unique @db.VarChar(50)
+  clothes clothes[]
+}
