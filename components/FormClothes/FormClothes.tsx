@@ -1,53 +1,57 @@
 'use client';
 
-import { Card, Form, Input, InputNumber, Select, Switch } from 'antd';
-import { default as Checkbox } from 'antd/es/checkbox/Group';
+import { Card, Form, Input, InputNumber, Radio, Select, Switch } from 'antd';
 import FormItem from 'antd/es/form/FormItem';
 import TextArea from 'antd/es/input/TextArea';
 import { Button } from '../Button';
 import { ROUTES } from '@/config';
-
-interface Size {
-  label: string;
-  value: string;
-}
-type Sizes = Size[];
+import { Clothing, Conditions, Sizes } from '@/types';
+import { useProductDelete } from '@/hooks';
+import { productEdit } from '@/actions';
 
 const labels = {
   name: 'Название',
   description: 'Описание',
   brand: 'Бренд',
-  condition: 'Состояние',
-  size: 'Размер',
+  conditions: 'Состояние',
+  sizes: 'Размер',
   sold: 'Продано',
   reserved: 'Забронировано',
   cost: 'Себестоимость',
   price: 'Цена',
 };
 
-const options: Sizes = [
-  { label: 'XS', value: 'xs' },
-  { label: 'S', value: 's' },
-  { label: 'M', value: 'm' },
-  { label: 'L', value: 'l' },
-  { label: 'XL', value: 'xl' },
-  { label: 'XXL', value: 'xxl' },
-];
-
 export default function FormClothes({
   edit,
   productId,
+  data,
+  conditions,
+  sizes,
 }: {
   edit?: boolean;
   productId?: number;
+  data?: Clothing;
+  conditions: Conditions;
+  sizes: Sizes;
 }): React.ReactNode {
+  const deleteHandler = useProductDelete(productId!);
+
   return (
     <Card style={{ maxWidth: 800, margin: 'auto' }}>
       <Form
         name="add-clothes"
         layout="vertical"
+        onFinish={(data: FormData) => productEdit(productId, data)}
         initialValues={{
-          ['price']: 0,
+          ['price']: data?.price || 0,
+          ['cost']: data?.cost || 0,
+          ['name']: data?.name || '',
+          ['description']: data?.description || '',
+          ['brand']: data?.brand || '',
+          ['conditionId']: data?.conditions.id,
+          ['sizeId']: data?.sizes.id,
+          ['sold']: data?.sold || false,
+          ['reserved']: data?.reserved || false,
         }}>
         <FormItem label={labels.name} name="name" rules={[{ required: true }]}>
           <Input allowClear />
@@ -70,8 +74,8 @@ export default function FormClothes({
           </FormItem>
 
           <FormItem
-            label={labels.condition}
-            name="condition"
+            label={labels.conditions}
+            name="conditionId"
             style={{
               display: 'inline-block',
               width: 'calc(50% - 8px)',
@@ -80,26 +84,26 @@ export default function FormClothes({
             <Select
               showSearch
               optionFilterProp="label"
-              options={[
-                {
-                  value: 'new',
-                  label: 'Новое',
-                },
-                {
-                  value: 'ideal',
-                  label: 'Идеальное состояние',
-                },
-                {
-                  value: 'used',
-                  label: 'Была в пользование',
-                },
-              ]}
+              options={conditions?.map((conditions) => ({
+                label: conditions.name,
+                value: conditions.id,
+              }))}
             />
           </FormItem>
         </FormItem>
 
-        <FormItem label={labels.size} name="size" rules={[{ required: true }]}>
-          <Checkbox options={options} />
+        <FormItem
+          label={labels.sizes}
+          name="sizeId"
+          rules={[{ required: true }]}>
+          <Radio.Group
+            optionType="button"
+            buttonStyle="solid"
+            options={sizes?.map((sizes) => ({
+              label: sizes.name,
+              value: sizes.id,
+            }))}
+          />
         </FormItem>
 
         <FormItem>
@@ -182,7 +186,11 @@ export default function FormClothes({
                 display: 'inline-block',
                 marginRight: '12px',
               }}>
-              <Button variant="solid" htmlType="button" color="danger">
+              <Button
+                variant="solid"
+                htmlType="button"
+                color="danger"
+                onClick={deleteHandler}>
                 Удалить
               </Button>
             </FormItem>

@@ -5,8 +5,7 @@ import { PrinterOutlined } from '@ant-design/icons';
 import { Divider, QRCode, Space } from 'antd';
 import { productSold, productReserved } from '@/actions';
 import { ROUTES } from '@/config';
-import { productDelete } from '@/actions/productDelete';
-import { useRouter } from 'next/navigation';
+import { useProductDelete } from '@/hooks';
 
 function printQRCode() {
   const canvas = document
@@ -60,14 +59,7 @@ export default function ButtonsClothes({
   sold: boolean;
   reserved: boolean;
 }): React.ReactNode {
-  const router = useRouter();
-
-  const deleteHandler = async () => {
-    const result = await productDelete(id);
-    if (result.success) {
-      router.push(ROUTES.PRODUCTS);
-    }
-  };
+  const deleteHandler = useProductDelete(id);
 
   return (
     <Space id="qrcode" size="middle">
