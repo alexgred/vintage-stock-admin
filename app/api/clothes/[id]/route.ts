@@ -102,3 +102,29 @@ export async function DELETE(
     );
   }
 }
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params;
+    const body = await request.json();
+
+    const updatedClothing = await prisma.clothes.update({
+      where: { id: Number(id) },
+      data: {
+        ...body
+      },
+    });
+
+    return NextResponse.json(updatedClothing);
+  } catch (error) {
+    console.error('Error updating clothing item:', error);
+
+    return NextResponse.json(
+      { error: 'Failed to update clothing item' },
+      { status: 500 }
+    );
+  }
+}
