@@ -5,36 +5,36 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import Link from 'next/link';
-import { routes, labels } from './constants';
+import { ROUTES, LABELS } from './constants';
 
 export const itemsSidebar: MenuProps['items'] = [
   {
     key: 'home',
     icon: <HomeOutlined />,
     label: (
-      <Link href={routes.HOME} title={labels.HOME}>
-        {labels.HOME}
+      <Link href={ROUTES.HOME} title={LABELS.HOME}>
+        {LABELS.HOME}
       </Link>
     ),
   },
   {
     key: 'productsGroup',
     icon: <ShoppingOutlined />,
-    label: labels.PRODUCTS_GROUP,
+    label: LABELS.PRODUCTS_GROUP,
     children: [
       {
         key: 'products',
         label: (
-          <Link href={routes.PRODUCTS} title={labels.PRODUCTS}>
-            {labels.PRODUCTS}
+          <Link href={ROUTES.PRODUCTS} title={LABELS.PRODUCTS}>
+            {LABELS.PRODUCTS}
           </Link>
         ),
       },
       {
         key: 'productsAdd',
         label: (
-          <Link href={routes.PRODUCTS_ADD} title={labels.PRODUCTS_ADD}>
-            {labels.PRODUCTS_ADD}
+          <Link href={ROUTES.PRODUCTS_ADD} title={LABELS.PRODUCTS_ADD}>
+            {LABELS.PRODUCTS_ADD}
           </Link>
         ),
       },
@@ -47,8 +47,8 @@ export const itemsSidebar: MenuProps['items'] = [
     key: 'profile',
     icon: <UserOutlined />,
     label: (
-      <Link href={routes.PROFILE} title={labels.PROFILE}>
-        {labels.PROFILE}
+      <Link href={ROUTES.PROFILE} title={LABELS.PROFILE}>
+        {LABELS.PROFILE}
       </Link>
     ),
   },

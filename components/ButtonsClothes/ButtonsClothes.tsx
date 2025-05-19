@@ -2,50 +2,47 @@
 
 import Button from '../Button/Button';
 import { PrinterOutlined } from '@ant-design/icons';
-import { routes } from '@/config';
 import { Divider, QRCode, Space } from 'antd';
+import { productSold, productReserved } from '@/actions';
+import { ROUTES } from '@/config';
+import { productDelete } from '@/actions/productDelete';
+import { useRouter } from 'next/navigation';
 
 function printQRCode() {
   const canvas = document
-    .getElementById('myqrcode')
+    .getElementById('qrcode')
     ?.querySelector<HTMLCanvasElement>('canvas');
 
   const url = canvas!.toDataURL();
-
-  // Создаем новое окно
   const printWindow = window.open('', '_blank');
-
-  // Создаем HTML содержимое для печати
   const printContent = `
-                <html>
-                    <head>
-                        <title>Печать</title>
-                        <style>
-                            img {
-                                max-width: 100%;
-                                height: auto;
-                                margin: auto;
-                                display: block;
-                            }
-                            @media print {
-                                @page {
-                                    margin: 0;
-                                    size: auto;
-                                }
-                            }
-                        </style>
-                    </head>
-                    <body>
-                        <img src="${url}" />
-                    </body>
-                </html>
-            `;
+      <html>
+          <head>
+              <title>Печать</title>
+              <style>
+                  img {
+                      max-width: 100%;
+                      height: auto;
+                      margin: auto;
+                      display: block;
+                  }
+                  @media print {
+                      @page {
+                          margin: 0;
+                          size: auto;
+                      }
+                  }
+              </style>
+          </head>
+          <body>
+              <img src="${url}" />
+          </body>
+      </html>
+  `;
 
-  // Записываем содержимое в новое окно
   printWindow!.document.write(printContent);
   printWindow!.document.close();
 
-  // Запускаем печать после загрузки изображения
   printWindow!.onload = function () {
     printWindow!.print();
     printWindow!.onafterprint = function () {
@@ -56,27 +53,44 @@ function printQRCode() {
 
 export default function ButtonsClothes({
   id,
+  sold,
+  reserved,
 }: {
   id: number;
+  sold: boolean;
+  reserved: boolean;
 }): React.ReactNode {
+  const router = useRouter();
+
+  const deleteHandler = async () => {
+    const result = await productDelete(id);
+    if (result.success) {
+      router.push(ROUTES.PRODUCTS);
+    }
+  };
+
   return (
-    <Space id="myqrcode" size="middle">
-      <Button href="/" variant="solid" color="primary">
+    <Space id="qrcode" size="middle">
+      <Button variant="solid" color="primary" onClick={() => productSold(id)} disabled={sold}>
         Продано
       </Button>
-      <Button href="/" variant="solid" color="primary">
+      <Button
+        variant="solid"
+        color="primary"
+        onClick={() => productReserved(id)}
+        disabled={sold ||reserved}>
         Забронировано
       </Button>
 
       <Divider type="vertical" />
 
       <Button
-        href={`${routes.PRODUCTS}/${id}/edit`}
+        href={`${ROUTES.PRODUCTS}/${id}/edit`}
         variant="solid"
         color="primary">
         Изменить
       </Button>
-      <Button variant="solid" htmlType="button" color="danger">
+      <Button variant="solid" htmlType="button" color="danger" onClick={deleteHandler}>
         Удалить
       </Button>
       <Button
@@ -87,7 +101,7 @@ export default function ButtonsClothes({
         icon={<PrinterOutlined />}
       />
 
-      <QRCode value={`${routes.PRODUCTS}/${id}`} bgColor="#000000" />
+      <QRCode value={`${ROUTES.PRODUCTS}/${id}`} bgColor="#000000" />
     </Space>
   );
 }

@@ -5,7 +5,7 @@ import { default as Checkbox } from 'antd/es/checkbox/Group';
 import FormItem from 'antd/es/form/FormItem';
 import TextArea from 'antd/es/input/TextArea';
 import { Button } from '../Button';
-import { routes } from '@/config';
+import { ROUTES } from '@/config';
 
 interface Size {
   label: string;
@@ -195,8 +195,8 @@ export default function FormClothes({
               htmlType="button"
               href={
                 edit && productId
-                  ? `${routes.PRODUCTS}/${productId}`
-                  : routes.PRODUCTS_ADD
+                  ? `${ROUTES.PRODUCTS}/${productId}`
+                  : ROUTES.PRODUCTS_ADD
               }>
               Отмена
             </Button>

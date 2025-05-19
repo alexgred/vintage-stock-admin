@@ -1,14 +1,13 @@
-export const routes = {
+export const ROUTES = {
   HOME: '/',
   PRODUCTS: '/products',
   PRODUCTS_ADD: '/products/add',
   PRODUCTS_CLOTHES: '/products/add/clothes',
   PRODUCTS_DRINKS: '/products/add/drinks',
-  PRODUCTS_EDIT: '/products/edit/:id',
   PROFILE: '/profile',
 } as const;
 
-export const labels = {
+export const LABELS = {
   HOME: 'Главная',
   PRODUCTS: 'Список товаров',
   PRODUCTS_GROUP: 'Товары',
