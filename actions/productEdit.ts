@@ -11,7 +11,6 @@ export async function productEdit(id: Id, data: FormData) {
   let status: boolean = false;
 
   try {
-    console.log(data);
     const response = await fetch(`http://localhost:3000/api/clothes/${id}`, {
       method: 'PUT',
       headers: {

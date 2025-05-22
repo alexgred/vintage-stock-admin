@@ -8,7 +8,6 @@ export async function productAdd(body: FormData) {
   let data: Clothing | null = null;
 
   try {
-    console.log(body);
     const response = await fetch(`http://localhost:3000/api/clothes`, {
       method: 'POST',
       headers: {

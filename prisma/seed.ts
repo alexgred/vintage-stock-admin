@@ -80,8 +80,6 @@ async function main() {
     ],
     skipDuplicates: true,
   });
-
-  console.log({ sizes, conditions, clothes });
 }
 
 main()
