@@ -1,12 +1,15 @@
 import { PlusCircleOutlined } from '@ant-design/icons';
-import { ProductsFilters, Table, Button } from '@/components';
+import { ProductsFilters, Table, Button, Pagination } from '@/components';
 import { Card, Flex } from 'antd';
 import Title from 'antd/es/typography/Title';
 import { ROUTES } from '@/config';
 import { Clothing, DataClothing } from '@/types';
 
-export default async function Products(): Promise<React.ReactNode> {
-  const productsData = await fetch('http://localhost:3000/api/clothes', {
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+
+export default async function Products({searchParams}: {searchParams: SearchParams}): Promise<React.ReactNode> {
+  const params = await searchParams;
+  const productsData = await fetch(`http://localhost:3000/api/clothes?${params.page ? `page=${params.page}` : ''}`, {
     method: 'get',
   });
   const sizesData = await fetch('http://localhost:3000/api/sizes', {
@@ -18,7 +21,7 @@ export default async function Products(): Promise<React.ReactNode> {
 
   const sizes = await sizesData.json();
   const conditions = await conditionsData.json();
-  const products: Clothing[] = await productsData.json();
+  const { products, total }: { products: Clothing[]; total: number } = await productsData.json();
 
   const data: DataClothing[] = products.map((product: Clothing) => {
     let status = 'Не продано';
@@ -55,6 +58,7 @@ export default async function Products(): Promise<React.ReactNode> {
       </Card>
       <Card>
         <Table data={data} />
+        <Pagination current={Number(params?.page)} total={total} />
       </Card>
     </>
   );

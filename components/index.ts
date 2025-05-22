@@ -6,3 +6,4 @@ export { ProductsList } from './ProductsList';
 export { Button } from './Button';
 export { FormClothes } from './FormClothes';
 export { ButtonsClothes } from './ButtonsClothes';
+export { Pagination } from './Pagination';

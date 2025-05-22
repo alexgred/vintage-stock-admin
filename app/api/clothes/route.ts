@@ -5,16 +5,21 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const page = Number(searchParams.get('page')) || 1;
 
+  const pageSize = 2;
+
   try {
     const products = await prisma.clothes.findMany({
       include: {
         conditions: true,
         sizes: true,
       },
-      skip: page * 2,
-      take: 2,
+      skip: (page - 1) * pageSize,
+      take: pageSize,
     });
-    return NextResponse.json(products);
+    const total = await prisma.clothes.count();
+    const totalPages = Math.ceil(total / pageSize);
+
+    return NextResponse.json({ products, total: totalPages });
   } catch (error) {
     console.error('Error fetching products:', error);
 

@@ -44,11 +44,13 @@ export default function Table({
   ];
 
   return (
-    <TableAntD
-      bordered={true}
-      columns={columns}
-      dataSource={data}
-      pagination={false}
-    />
+    <>
+      <TableAntD
+        bordered={true}
+        columns={columns}
+        dataSource={data}
+        pagination={false}
+      />
+    </>
   );
 }
