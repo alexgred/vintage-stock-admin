@@ -47,12 +47,12 @@ export async function PUT(
         name: body.name,
         brand: body.brand,
         description: body.description || '',
-        condition_id: body.conditionId ? Number(body.conditionId) : undefined,
-        size_id: body.sizeId ? Number(body.sizeId) : undefined,
+        condition_id: body.condition_id ? Number(body.condition_id) : undefined,
+        size_id: body.size_id ? Number(body.size_id) : undefined,
         cost: body.cost !== undefined ? Number(body.cost) : 0,
         price: body.price !== undefined ? Number(body.price) : 0,
-        sold: body.sold !== undefined ? Boolean(body.sold) : false,
-        reserved: body.reserved !== undefined ? Boolean(body.reserved) : false,
+        is_sold: body.is_sold !== undefined ? Boolean(body.is_sold) : false,
+        is_reserved: body.is_reserved !== undefined ? Boolean(body.is_reserved) : false,
       },
       include: {
         conditions: true,
@@ -110,6 +110,8 @@ export async function PATCH(
   try {
     const { id } = await params;
     const body = await request.json();
+
+    console.log(body);
 
     const updatedClothing = await prisma.clothes.update({
       where: { id: Number(id) },

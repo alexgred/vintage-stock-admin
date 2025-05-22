@@ -3,21 +3,48 @@ import { ProductsFilters, Table, Button } from '@/components';
 import { Card, Flex } from 'antd';
 import Title from 'antd/es/typography/Title';
 import { ROUTES } from '@/config';
+import { Clothing, DataClothing } from '@/types';
 
-const data = await fetch('http://localhost:3000/api/products', {
-  method: 'get',
-});
-// const post = data.json();
+export default async function Products(): Promise<React.ReactNode> {
+  const productsData = await fetch('http://localhost:3000/api/clothes', {
+    method: 'get',
+  });
+  const sizesData = await fetch('http://localhost:3000/api/sizes', {
+    method: 'get',
+  });
+  const conditionsData = await fetch('http://localhost:3000/api/conditions', {
+    method: 'get',
+  });
 
-console.log(data);
+  const sizes = await sizesData.json();
+  const conditions = await conditionsData.json();
+  const products: Clothing[] = await productsData.json();
 
-export default function Products(): React.ReactNode {
+  const data: DataClothing[] = products.map((product: Clothing) => {
+    let status = 'Не продано';
+    if (product.is_sold) {
+      status = 'Продано';
+    } else if (product.is_reserved) {
+      status = 'Забронировано';
+    }
+    return {
+      key: product.id.toString(),
+      name: product.name,
+      brand: product.brand,
+      condition: product.conditions.name,
+      size: product.sizes.name,
+      cost: product.cost,
+      price: product.price,
+      status: status,
+    };
+  });
+
   return (
     <>
       <Title>Products</Title>
       <Card>
         <Flex justify="space-between" align="flex-start">
-          <ProductsFilters />
+          <ProductsFilters sizes={sizes} conditions={conditions} />
           <Button
             type="primary"
             icon={<PlusCircleOutlined />}
@@ -27,7 +54,7 @@ export default function Products(): React.ReactNode {
         </Flex>
       </Card>
       <Card>
-        <Table />
+        <Table data={data} />
       </Card>
     </>
   );

@@ -3,6 +3,10 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
+    await prisma.clothes.deleteMany({});
+  await prisma.conditions.deleteMany({});
+  await prisma.sizes.deleteMany({});
+
   const sizes = await prisma.sizes.createMany({
     data: [
       { name: 'XS' },
@@ -16,7 +20,11 @@ async function main() {
   });
 
   const conditions = await prisma.conditions.createMany({
-    data: [{ name: 'Новое' }, { name: 'Идеальное' }, { name: 'Следы носки' }],
+    data: [
+      { name: 'Новое' },
+      { name: 'Идеальное' },
+      { name: 'Следы носки' },
+    ],
     skipDuplicates: true,
   });
 
@@ -26,60 +34,62 @@ async function main() {
         name: 'Футболка хлопковая',
         brand: 'Nike',
         description: 'Белая хлопковая футболка с круглым вырезом',
-        conditionId: 1,
-        sizeId: 3,
+        condition_id: 1,
+        size_id: 3,
         cost: 800,
         price: 1999,
-        sold: false,
-        reserved: false,
+        is_sold: false,
+        is_reserved: false,
       },
       {
         name: 'Джинсы скинни',
         brand: "Levi's",
         description: 'Синие облегающие джинсы с потертостями',
-        conditionId: 2,
-        sizeId: 4,
+        condition_id: 2,
+        size_id: 4,
         cost: 2500,
         price: 4500,
-        sold: false,
-        reserved: true,
+        is_sold: false,
+        is_reserved: true,
       },
       {
         name: 'Куртка зимняя',
         brand: 'The North Face',
         description: 'Теплая пуховая куртка черного цвета',
-        conditionId: 1,
-        sizeId: 5,
+        condition_id: 1,
+        size_id: 5,
         cost: 7500,
         price: 12000,
-        sold: true,
-        reserved: false,
+        is_sold: true,
+        is_reserved: false,
       },
       {
         name: 'Платье летнее',
         brand: 'Zara',
         description: 'Легкое хлопковое платье в цветочек',
-        conditionId: 1,
-        sizeId: 2,
+        condition_id: 1,
+        size_id: 2,
         cost: 1500,
         price: 3500,
-        sold: false,
-        reserved: false,
+        is_sold: false,
+        is_reserved: false,
       },
       {
         name: 'Штаны тренировочные',
         brand: 'Adidas',
         description: 'Черные штаны с лампасами',
-        conditionId: 3,
-        sizeId: 4,
+        condition_id: 3,
+        size_id: 4,
         cost: 1800,
         price: 3200,
-        sold: false,
-        reserved: false,
+        is_sold: false,
+        is_reserved: false,
       },
     ],
     skipDuplicates: true,
   });
+
+  console.log({ sizes, conditions, clothes });
 }
 
 main()
@@ -87,7 +97,7 @@ main()
     await prisma.$disconnect();
   })
   .catch(async (e) => {
-    console.error(e);
+    console.error('Error seeding database:', e);
     await prisma.$disconnect();
     process.exit(1);
   });

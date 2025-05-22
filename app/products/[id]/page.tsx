@@ -18,9 +18,9 @@ export default async function Product({
 
   let status = 'Не продано';
 
-  if (posts.sold) {
+  if (posts.is_sold) {
     status = 'Продано';
-  } else if (posts.reserved) {
+  } else if (posts.is_reserved) {
     status = 'Забронировано';
   }
 
@@ -47,7 +47,7 @@ export default async function Product({
           </Descriptions>
         </Space>
         <Divider type="horizontal" />
-        <ButtonsClothes id={id} sold={posts.sold} reserved={posts.reserved} />
+        <ButtonsClothes id={id} sold={posts.is_sold} reserved={posts.is_reserved} />
       </Card>
     </>
   );

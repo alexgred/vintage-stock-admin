@@ -1,76 +1,53 @@
 'use client';
 
 import { Table as TableAntD } from 'antd';
-import type { TableColumnsType, TableProps } from 'antd';
+import type { TableColumnsType } from 'antd';
+import { DataClothing } from '@/types';
 
-export default function Table(): React.ReactNode {
-  interface DataType {
-    key: React.Key;
-    name: string;
-    age: number;
-    address: string;
-  }
-
-  const columns: TableColumnsType<DataType> = [
+export default function Table({
+  data,
+}: {
+  data: DataClothing[];
+}): React.ReactNode {
+  const columns: TableColumnsType<DataClothing> = [
     {
-      title: 'Name',
+      title: 'Название',
       dataIndex: 'name',
-      width: '30%',
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      sorter: (a, b) => a.age - b.age,
+      title: 'Бренд',
+      dataIndex: 'brand',
+      sorter: (a, b) => a.brand.localeCompare(b.brand),
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      width: '40%',
+      title: 'Состояние',
+      dataIndex: 'condition',
+    },
+    {
+      title: 'Размер',
+      dataIndex: 'size',
+    },
+    {
+      title: 'Себестоимость',
+      dataIndex: 'cost',
+      sorter: (a, b) => a.cost - b.cost,
+    },
+    {
+      title: 'Цена',
+      dataIndex: 'price',
+      sorter: (a, b) => a.price - b.price,
+    },
+    {
+      title: 'Статус',
+      dataIndex: 'status',
     },
   ];
-
-  const data: DataType[] = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sydney No. 1 Lake Park',
-    },
-    {
-      key: '4',
-      name: 'Jim Red',
-      age: 32,
-      address: 'London No. 2 Lake Park',
-    },
-  ];
-
-  const onChange: TableProps<DataType>['onChange'] = (
-    pagination,
-    filters,
-    sorter,
-    extra,
-  ) => {
-    console.log('params', pagination, filters, sorter, extra);
-  };
 
   return (
     <TableAntD
       bordered={true}
       columns={columns}
       dataSource={data}
-      onChange={onChange}
       pagination={false}
     />
   );

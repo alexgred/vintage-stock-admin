@@ -2,40 +2,38 @@
 
 import { Select, Space, Switch } from 'antd';
 import Search from 'antd/es/input/Search';
+import { Conditions, Sizes } from '@/types';
 
-export default function ProductsFilters(): React.ReactNode {
+export default function ProductsFilters({
+  conditions,
+  sizes,
+}: {
+  conditions: Conditions;
+  sizes: Sizes;
+}): React.ReactNode {
   return (
     <Space className="products-filters" align="center">
       <Search
-        placeholder="input search text"
+        placeholder="Поиск"
         onSearch={() => console.log('jhk')}
         enterButton
       />
       <Select
-        placeholder="Size"
+        placeholder="Размер"
         optionFilterProp="label"
-        options={[
-          {
-            value: 'xs',
-            label: 'xs',
-          },
-          {
-            value: 's',
-            label: 's',
-          },
-          {
-            value: 'm',
-            label: 'm',
-          },
-          {
-            value: 'l',
-            label: 'l',
-          },
-          {
-            value: 'xl',
-            label: 'xl',
-          },
-        ]}
+        options={sizes.map((size) => ({
+          value: size.id,
+          label: size.name,
+        }))}
+      />
+      <Select
+        placeholder="Состояние"
+        optionFilterProp="label"
+        style={{ width: 200 }}
+        options={conditions.map((condition) => ({
+          value: condition.id,
+          label: condition.name,
+        }))}
       />
       <div>
         <Switch checkedChildren="Продано" unCheckedChildren="В продаже" />

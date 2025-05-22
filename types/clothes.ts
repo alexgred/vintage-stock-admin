@@ -13,8 +13,8 @@ export interface Clothing {
   };
   cost: number;
   price: number;
-  sold: boolean;
-  reserved: boolean;
+  is_sold: boolean;
+  is_reserved: boolean;
 }
 
 export interface Size {
@@ -30,3 +30,14 @@ export interface Condition {
 }
 
 export type Conditions = Condition[];
+
+export interface DataClothing {
+  key: React.Key;
+  name: string;
+  brand: string;
+  condition: string;
+  size: string;
+  cost: number;
+  price: number;
+  status: string;
+}

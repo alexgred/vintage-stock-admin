@@ -52,10 +52,10 @@ export default function FormClothes({
           ['name']: data?.name || '',
           ['description']: data?.description || '',
           ['brand']: data?.brand || '',
-          ['conditionId']: data?.conditions.id,
-          ['sizeId']: data?.sizes.id,
-          ['sold']: data?.sold || false,
-          ['reserved']: data?.reserved || false,
+          ['condition_id']: data?.conditions.id,
+          ['size_id']: data?.sizes.id,
+          ['is_sold']: data?.is_sold || false,
+          ['is_reserved']: data?.is_reserved || false,
         }}>
         <FormItem label={labels.name} name="name" rules={[{ required: true }]}>
           <Input allowClear />
@@ -79,7 +79,8 @@ export default function FormClothes({
 
           <FormItem
             label={labels.conditions}
-            name="conditionId"
+            name="condition_id"
+            rules={[{ required: true }]}
             style={{
               display: 'inline-block',
               width: 'calc(50% - 8px)',
@@ -98,7 +99,7 @@ export default function FormClothes({
 
         <FormItem
           label={labels.sizes}
-          name="sizeId"
+          name="size_id"
           rules={[{ required: true }]}>
           <Radio.Group
             optionType="button"
@@ -152,7 +153,7 @@ export default function FormClothes({
 
         <FormItem>
           <FormItem
-            name="sold"
+            name="is_sold"
             style={{
               display: 'inline-block',
               marginRight: '12px',
@@ -163,7 +164,7 @@ export default function FormClothes({
             />
           </FormItem>
           <FormItem
-            name="reserved"
+            name="is_reserved"
             style={{
               display: 'inline-block',
             }}>

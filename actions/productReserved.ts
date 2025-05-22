@@ -9,7 +9,7 @@ export async function productReserved(id: number) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ reserved: true }),
+      body: JSON.stringify({ is_reserved: true }),
     });
 
     if (!response.ok) {

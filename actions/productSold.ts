@@ -9,7 +9,7 @@ export async function productSold(id: number) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ sold: true }),
+      body: JSON.stringify({ is_sold: true }),
     });
 
     if (!response.ok) {

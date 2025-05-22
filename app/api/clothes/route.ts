@@ -1,13 +1,18 @@
 import { prisma } from '@/lib/prisma';
 import { type NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const page = Number(searchParams.get('page')) || 1;
+
   try {
     const products = await prisma.clothes.findMany({
       include: {
         conditions: true,
         sizes: true,
       },
+      skip: page * 2,
+      take: 2,
     });
     return NextResponse.json(products);
   } catch (error) {
@@ -29,12 +34,12 @@ export async function POST(request: NextRequest) {
         name: body.name,
         brand: body.brand,
         description: body.description || '',
-        condition_id: Number(body.conditionId),
-        size_id: Number(body.sizeId),
+        condition_id: Number(body.condition_id),
+        size_id: Number(body.size_id),
         cost: Number(body.cost) || 0,
         price: Number(body.price) || 0,
-        sold: body.sold || false,
-        reserved: body.reserved || false,
+        is_sold: body.is_sold || false,
+        is_reserved: body.is_reserved || false,
       },
     });
 

@@ -17,7 +17,7 @@ export async function productAdd(body: FormData) {
     });
 
     if (!response.ok) {
-      throw new Error(`Failed to change product, status ${response.status}`);
+      throw new Error(`Failed to add product, status ${response.status}`);
     }
 
     data = await response.json();
