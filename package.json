@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "db:seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts",
-    "db:reset": "prisma migrate reset --force && npm run db:seed"
+    "db:reset": "prisma migrate reset --force && npm run db:seed",
+    "prettier": "prettier . --write",
+    "prettier:check": "prettier . --check"
   },
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.2",
@@ -28,6 +30,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
+    "prettier": "^3.5.3",
     "prisma": "^6.6.0",
     "ts-node": "^10.9.2",
     "typescript": "^5"
