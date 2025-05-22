@@ -1,7 +1,3 @@
 export default function Profile(): React.ReactNode {
-  return (
-    <div>
-      Profile
-    </div>
-  );
+  return <div>Profile</div>;
 }

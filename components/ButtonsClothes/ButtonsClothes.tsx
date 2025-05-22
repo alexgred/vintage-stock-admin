@@ -58,17 +58,20 @@ export default function ButtonsClothes({
   sold: boolean;
   reserved: boolean;
 }): React.ReactNode {
-
   return (
     <Space id="qrcode" size="middle">
-      <Button variant="solid" color="primary" onClick={() => productSold(id)} disabled={sold}>
+      <Button
+        variant="solid"
+        color="primary"
+        onClick={() => productSold(id)}
+        disabled={sold}>
         Продано
       </Button>
       <Button
         variant="solid"
         color="primary"
         onClick={() => productReserved(id)}
-        disabled={sold ||reserved}>
+        disabled={sold || reserved}>
         Забронировано
       </Button>
 
@@ -80,7 +83,11 @@ export default function ButtonsClothes({
         color="primary">
         Изменить
       </Button>
-      <Button variant="solid" htmlType="button" color="danger" onClick={() => productDelete(id)}>
+      <Button
+        variant="solid"
+        htmlType="button"
+        color="danger"
+        onClick={() => productDelete(id)}>
         Удалить
       </Button>
       <Button

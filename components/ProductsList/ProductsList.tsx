@@ -11,7 +11,7 @@ const data = [
     title: 'Одежда',
     description: 'Винтажная одежда, бриллиантики',
     icon: <SkinOutlined style={{ fontSize: '24px', marginTop: '8px' }} />,
-    link: ROUTES.PRODUCTS_CLOTHES
+    link: ROUTES.PRODUCTS_CLOTHES,
   },
   {
     title: 'Напитки',

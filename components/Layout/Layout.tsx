@@ -10,7 +10,6 @@ import styles from './Layout.module.css';
 import { Sidebar } from '../Sidebar';
 import { Breadcrumbs } from '../Breadcrumbs';
 
-
 export default function Layout({
   children,
 }: {

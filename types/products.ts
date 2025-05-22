@@ -7,7 +7,7 @@ export interface Clothing {
     id: number;
     name: string;
   };
-  sizes : {
+  sizes: {
     id: number;
     name: string;
   };

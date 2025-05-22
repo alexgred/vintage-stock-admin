@@ -1,4 +1,4 @@
-import { theme, type ThemeConfig } from "antd";
+import { theme, type ThemeConfig } from 'antd';
 
 export const colorBgBase = '#17191d';
 export const colorBgBody = 'color-mix(in srgb, #17191d, grey 3%)';

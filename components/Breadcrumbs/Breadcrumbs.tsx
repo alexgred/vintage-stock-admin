@@ -1,8 +1,8 @@
 'use client';
 
-import { Breadcrumb } from "antd";
-import Link from "next/link";
-import { useSelectedLayoutSegments } from "next/navigation";
+import { Breadcrumb } from 'antd';
+import Link from 'next/link';
+import { useSelectedLayoutSegments } from 'next/navigation';
 
 export default function Breadcrumbs(): React.ReactNode {
   const segments = useSelectedLayoutSegments();
@@ -25,10 +25,8 @@ export default function Breadcrumbs(): React.ReactNode {
   });
   items.unshift({
     key: 'home',
-    title: <Link href='/'>Главная</Link>,
+    title: <Link href="/">Главная</Link>,
   });
 
-  return (
-    segments.length > 0 && <Breadcrumb items={items} />
-  );
+  return segments.length > 0 && <Breadcrumb items={items} />;
 }

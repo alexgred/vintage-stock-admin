@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await params;
@@ -18,7 +18,7 @@ export async function GET(
     if (!clothing) {
       return NextResponse.json(
         { error: 'Clothing item not found' },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -28,14 +28,14 @@ export async function GET(
 
     return NextResponse.json(
       { error: 'Failed to fetch clothing item' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const body = await request.json();
@@ -66,14 +66,14 @@ export async function PUT(
 
     return NextResponse.json(
       { error: 'Failed to update clothing item' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await params;
@@ -84,7 +84,7 @@ export async function DELETE(
     if (!existingItem) {
       return NextResponse.json(
         { error: 'Clothing item not found' },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -98,14 +98,14 @@ export async function DELETE(
 
     return NextResponse.json(
       { error: 'Failed to delete clothing item' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   try {
     const { id } = await params;
@@ -114,7 +114,7 @@ export async function PATCH(
     const updatedClothing = await prisma.clothes.update({
       where: { id: Number(id) },
       data: {
-        ...body
+        ...body,
       },
     });
 
@@ -124,7 +124,7 @@ export async function PATCH(
 
     return NextResponse.json(
       { error: 'Failed to update clothing item' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

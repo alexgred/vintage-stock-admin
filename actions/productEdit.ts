@@ -1,11 +1,10 @@
 'use server';
 
-import { revalidateTag } from "next/cache";
-import { redirect } from "next/navigation";
-import { ROUTES } from "@/config";
+import { revalidateTag } from 'next/cache';
+import { redirect } from 'next/navigation';
+import { ROUTES } from '@/config';
 
 type Id = number | undefined;
-
 
 export async function productEdit(id: Id, data: FormData) {
   let status: boolean = false;

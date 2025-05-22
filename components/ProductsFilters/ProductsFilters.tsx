@@ -1,10 +1,9 @@
 'use client';
 
-import { Select, Space, Switch } from "antd";
-import Search from "antd/es/input/Search";
+import { Select, Space, Switch } from 'antd';
+import Search from 'antd/es/input/Search';
 
 export default function ProductsFilters(): React.ReactNode {
-
   return (
     <Space className="products-filters" align="center">
       <Search

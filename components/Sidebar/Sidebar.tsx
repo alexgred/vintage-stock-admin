@@ -6,13 +6,11 @@ import { itemsSidebar } from '@/config';
 
 import styles from './Sidebar.module.css';
 
-
 export default function Sidebar({
   collapsed,
 }: {
   collapsed: boolean;
 }): React.ReactNode {
-
   return (
     <Sider trigger={null} collapsible collapsed={collapsed} width="20%">
       <div className={styles.logo} />

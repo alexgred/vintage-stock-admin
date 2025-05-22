@@ -12,7 +12,10 @@ export async function GET(
     });
 
     if (!condition) {
-      return NextResponse.json({ error: 'Condition not found' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'Condition not found' },
+        { status: 404 },
+      );
     }
 
     return NextResponse.json(condition);

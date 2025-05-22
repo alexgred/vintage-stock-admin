@@ -13,7 +13,7 @@ export async function GET() {
 
     return NextResponse.json(
       { error: 'Failed to fetch conditions' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -23,10 +23,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
 
     if (!body.name) {
-      return NextResponse.json(
-        { error: 'Name is required' },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: 'Name is required' }, { status: 400 });
     }
 
     const condition = await prisma.conditions.create({
@@ -41,7 +38,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       { error: 'Failed to create condition' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

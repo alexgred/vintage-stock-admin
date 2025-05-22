@@ -25,9 +25,5 @@ export default function Button(props: ButtonProps): React.ReactNode {
     };
   }
 
-  return (
-    <ButtonAntD {...newProps}>
-      {children}
-    </ButtonAntD>
-  );
+  return <ButtonAntD {...newProps}>{children}</ButtonAntD>;
 }

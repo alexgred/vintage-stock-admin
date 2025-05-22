@@ -1,7 +1,7 @@
 'use server';
 
-import { ROUTES } from "@/config";
-import { redirect } from "next/navigation";
+import { ROUTES } from '@/config';
+import { redirect } from 'next/navigation';
 
 export async function productDelete(id: number) {
   let status: boolean = false;

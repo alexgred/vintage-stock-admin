@@ -35,7 +35,12 @@ export default async function ProductEdit({
     <>
       <Title>Изменить {id}</Title>
       <Card>
-        <FormClothes productId={id} data={posts} conditions={conditions} sizes={sizes} />
+        <FormClothes
+          productId={id}
+          data={posts}
+          conditions={conditions}
+          sizes={sizes}
+        />
       </Card>
     </>
   );

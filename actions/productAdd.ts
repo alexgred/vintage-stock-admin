@@ -1,8 +1,8 @@
 'use server';
 
-import { redirect } from "next/navigation";
-import { ROUTES } from "@/config";
-import { Clothing } from "@/types";
+import { redirect } from 'next/navigation';
+import { ROUTES } from '@/config';
+import { Clothing } from '@/types';
 
 export async function productAdd(body: FormData) {
   let data: Clothing | null = null;
