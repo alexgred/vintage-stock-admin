@@ -8,6 +8,8 @@ type Id = number | undefined;
 
 
 export async function productEdit(id: Id, data: FormData) {
+  let status: boolean = false;
+
   try {
     console.log(data);
     const response = await fetch(`http://localhost:3000/api/clothes/${id}`, {
@@ -23,9 +25,12 @@ export async function productEdit(id: Id, data: FormData) {
     }
 
     revalidateTag(`product-${id}`);
+    status = true;
   } catch (error) {
     console.error('Error:', error);
   } finally {
-    redirect(`${ROUTES.PRODUCTS}/${id}`);
+    if (status) {
+      redirect(`${ROUTES.PRODUCTS}/${id}`);
+    }
   }
 }

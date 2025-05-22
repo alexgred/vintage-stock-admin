@@ -3,9 +3,8 @@
 import Button from '../Button/Button';
 import { PrinterOutlined } from '@ant-design/icons';
 import { Divider, QRCode, Space } from 'antd';
-import { productSold, productReserved } from '@/actions';
+import { productSold, productReserved, productDelete } from '@/actions';
 import { ROUTES } from '@/config';
-import { useProductDelete } from '@/hooks';
 
 function printQRCode() {
   const canvas = document
@@ -59,7 +58,6 @@ export default function ButtonsClothes({
   sold: boolean;
   reserved: boolean;
 }): React.ReactNode {
-  const deleteHandler = useProductDelete(id);
 
   return (
     <Space id="qrcode" size="middle">
@@ -82,7 +80,7 @@ export default function ButtonsClothes({
         color="primary">
         Изменить
       </Button>
-      <Button variant="solid" htmlType="button" color="danger" onClick={deleteHandler}>
+      <Button variant="solid" htmlType="button" color="danger" onClick={() => productDelete(id)}>
         Удалить
       </Button>
       <Button

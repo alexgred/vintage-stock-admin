@@ -6,8 +6,8 @@ import TextArea from 'antd/es/input/TextArea';
 import { Button } from '../Button';
 import { ROUTES } from '@/config';
 import { Clothing, Conditions, Sizes } from '@/types';
-import { useProductDelete } from '@/hooks';
-import { productEdit } from '@/actions';
+import { productDelete, productEdit } from '@/actions';
+import { productAdd } from '@/actions/productAdd';
 
 const labels = {
   name: 'Название',
@@ -22,26 +22,30 @@ const labels = {
 };
 
 export default function FormClothes({
-  edit,
   productId,
   data,
   conditions,
   sizes,
 }: {
-  edit?: boolean;
   productId?: number;
   data?: Clothing;
   conditions: Conditions;
   sizes: Sizes;
 }): React.ReactNode {
-  const deleteHandler = useProductDelete(productId!);
+  const submitHandler = (data: FormData) => {
+    if (productId) {
+      productEdit(productId, data);
+    } else {
+      productAdd(data);
+    }
+  };
 
   return (
     <Card style={{ maxWidth: 800, margin: 'auto' }}>
       <Form
         name="add-clothes"
         layout="vertical"
-        onFinish={(data: FormData) => productEdit(productId, data)}
+        onFinish={submitHandler}
         initialValues={{
           ['price']: data?.price || 0,
           ['cost']: data?.cost || 0,
@@ -180,7 +184,7 @@ export default function FormClothes({
               Сохранить
             </Button>
           </FormItem>
-          {edit && (
+          {productId && (
             <FormItem
               style={{
                 display: 'inline-block',
@@ -190,7 +194,7 @@ export default function FormClothes({
                 variant="solid"
                 htmlType="button"
                 color="danger"
-                onClick={deleteHandler}>
+                onClick={() => productDelete(productId)}>
                 Удалить
               </Button>
             </FormItem>
@@ -202,7 +206,7 @@ export default function FormClothes({
             <Button
               htmlType="button"
               href={
-                edit && productId
+                productId
                   ? `${ROUTES.PRODUCTS}/${productId}`
                   : ROUTES.PRODUCTS_ADD
               }>
